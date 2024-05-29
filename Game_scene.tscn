@@ -93,7 +93,7 @@ shape = SubResource("BoxShape3D_2shqx")
 transform = Transform3D(0.999263, 0.0383878, 1.23293e-08, -0.0354401, 0.92253, 0.384295, 0.0147523, -0.384012, 0.92321, 0, 3.133, 4.86792)
 script = ExtResource("3_b65qs")
 
-[node name="Node2D" type="Node2D" parent="RigidBody3D"]
+[node name="Co-Ordinate-Check" type="Node2D" parent="RigidBody3D"]
 unique_name_in_owner = true
 script = ExtResource("4_5pdbf")
 
