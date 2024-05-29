@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c4hos6tghqw1v"]
+[gd_scene load_steps=17 format=3 uid="uid://c4hos6tghqw1v"]
 
 [ext_resource type="Texture2D" uid="uid://dsy6a7ls43nux" path="res://8k_sun.jpg" id="1_eg74v"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="2_6krv8"]
 [ext_resource type="Script" path="res://Camera3D.gd" id="3_b65qs"]
 [ext_resource type="Script" path="res://Node2D.gd" id="4_5pdbf"]
+[ext_resource type="Texture2D" uid="uid://dnihe717jxfdg" path="res://8k_stars.jpg" id="5_qt4ow"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejosr"]
 metallic = 1.0
@@ -15,8 +16,8 @@ emission_texture = ExtResource("1_eg74v")
 
 [sub_resource type="SphereMesh" id="SphereMesh_r6vac"]
 material = SubResource("StandardMaterial3D_ejosr")
-radius = 100.0
-height = 200.0
+radius = 200.0
+height = 400.0
 radial_segments = 128
 rings = 128
 
@@ -24,15 +25,30 @@ rings = 128
 radius = 0.321171
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pnxbh"]
+emission_enabled = true
+emission = Color(0.0303389, 0.815601, 1, 1)
+emission_energy_multiplier = 1.77
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cxcan"]
 material = SubResource("StandardMaterial3D_pnxbh")
 height = 2.99
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h6xcg"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_yax26"]
+material = SubResource("StandardMaterial3D_h6xcg")
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_2shqx"]
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_najnh"]
+panorama = ExtResource("5_qt4ow")
+
+[sub_resource type="Sky" id="Sky_dmcn1"]
+sky_material = SubResource("PanoramaSkyMaterial_najnh")
+
 [sub_resource type="Environment" id="Environment_wh4qx"]
-background_mode = 1
+background_mode = 2
+sky = SubResource("Sky_dmcn1")
 ambient_light_source = 2
 ambient_light_color = Color(0.133196, 0.133196, 0.133196, 1)
 ambient_light_energy = 0.5
@@ -58,7 +74,7 @@ gravity_point = true
 gravity_point_unit_distance = 1024.0
 gravity_point_center = Vector3(0, 0, 0)
 gravity_direction = Vector3(0, 0, 0)
-gravity = 60.0
+gravity = 0.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
@@ -71,12 +87,11 @@ light_specular = 16.0
 distance_fade_enabled = true
 distance_fade_length = 4096.0
 omni_range = 4096.0
-omni_attenuation = 0.466517
+omni_attenuation = 0.5
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(0.274983, 0, -0.961449, 0, 1, 0, 0.961449, 0, 0.274983, 0, 0, 966.749)
-linear_damp = 7.071
-angular_velocity = Vector3(0, 0.174533, 0)
+transform = Transform3D(0.274983, 0, -0.961449, 0, 1, 0, 0.961449, 0, 0.274983, 0, 0, 1600.3)
+linear_damp = 3.0
 angular_damp = 2.0
 script = ExtResource("2_6krv8")
 
@@ -86,6 +101,12 @@ gi_mode = 0
 mesh = SubResource("CapsuleMesh_cxcan")
 skeleton = NodePath("../..")
 
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(-0.780073, 3.57628e-07, -1.77636e-15, 0, -3.15764e-07, -1, 4.47035e-08, 7.22384, -4.37114e-08, 0, 0, 0)
+gi_mode = 0
+mesh = SubResource("TorusMesh_yax26")
+skeleton = NodePath("../..")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_2shqx")
 
@@ -93,7 +114,7 @@ shape = SubResource("BoxShape3D_2shqx")
 transform = Transform3D(0.999263, 0.0383878, 1.23293e-08, -0.0354401, 0.92253, 0.384295, 0.0147523, -0.384012, 0.92321, 0, 3.133, 4.86792)
 script = ExtResource("3_b65qs")
 
-[node name="Co-Ordinate-Check" type="Node2D" parent="RigidBody3D"]
+[node name="CoordinateCheck" type="Node2D" parent="RigidBody3D"]
 unique_name_in_owner = true
 script = ExtResource("4_5pdbf")
 

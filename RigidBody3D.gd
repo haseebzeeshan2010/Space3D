@@ -7,11 +7,12 @@ func _physics_process(delta):
 	#print(get_angle_to(get_viewport().get_mouse_position()))
 	#set_linear_damp(1.4)
 	impulse_strength = 38
-	var m = %Node2D.get_global_mouse_position()
+	var m = %CoordinateCheck.get_global_mouse_position()
 	var aim_speed = deg_to_rad(1)
 	#print(%Node2D.viewportsize)
 	
-	constant_torque = Vector3(0,%Node2D.direction/10000,0)
+	print(rotation.z)
+	constant_torque = Vector3(0,%CoordinateCheck.directionx/10000,0)
 	#if %Node2D.direction > 0:
 		#constant_torque = Vector3(0,0.1,0)
 	#else:
@@ -19,4 +20,4 @@ func _physics_process(delta):
 	var angle = rotation
 	
 	
-	apply_central_force(Vector3(sin(angle.y), sin(angle.x), cos(angle.y)) *-250)
+	apply_central_force(Vector3(sin(angle.y), 0, cos(angle.y)) *-70)
