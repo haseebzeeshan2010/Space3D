@@ -16,7 +16,7 @@ func _physics_process(delta):
 	constant_torque = Vector3(0,%CoordinateCheck.directionx/10000,0)
 	
 	
-	print(%CoordinateCheck.directiony)
+	#print(%CoordinateCheck.directiony)
 	#if %CoordinateCheck.directiony > 0:
 		#apply_central_force(Vector3(0,20,0))
 	#else:
@@ -26,7 +26,7 @@ func _physics_process(delta):
 		
 	#SHIP YAW	
 	%Ship_axis.rotation.z = lerp(%Ship_axis.rotation.z, float(%CoordinateCheck.directionx/2000) , delta*2)
-	%Ship_axis.rotation.x = lerp(%Ship_axis.rotation.x, float(%CoordinateCheck.directiony/2000) , delta*2)
+	%Ship_axis.rotation.x = lerp(%Ship_axis.rotation.x, float(%CoordinateCheck.directiony/1500) , delta*2)
 	
 	var angle = rotation
 	

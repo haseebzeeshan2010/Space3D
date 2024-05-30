@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://c4hos6tghqw1v"]
+[gd_scene load_steps=21 format=3 uid="uid://c4hos6tghqw1v"]
 
 [ext_resource type="Texture2D" uid="uid://dsy6a7ls43nux" path="res://8k_sun.jpg" id="1_eg74v"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="2_6krv8"]
+[ext_resource type="Texture2D" uid="uid://bcv4k5giuh1tc" path="res://line.svg" id="2_x4spo"]
 [ext_resource type="Script" path="res://Node2D.gd" id="4_5pdbf"]
 [ext_resource type="PackedScene" uid="uid://c37lrm54fnr0b" path="res://test_ship_2.tscn" id="4_pag8e"]
 [ext_resource type="PackedScene" uid="uid://bcmpmxovtlbvh" path="res://Test_ship_1.tscn" id="5_o8lw3"]
@@ -40,10 +41,10 @@ radial_segments = 128
 rings = 128
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_efwe2"]
-radius = 250.0
+radius = 170.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8w466"]
-radius = 240.0
+radius = 100.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ylvvx"]
 radius = 0.321171
@@ -76,6 +77,23 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 linear_damp = 2.0
 angular_damp = 2.0
 script = ExtResource("2_6krv8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Spaceship"]
+
+[node name="TextureRect" type="TextureRect" parent="Spaceship/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -438.0
+offset_top = -55.0
+offset_right = 404.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_x4spo")
+stretch_mode = 1
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Spaceship"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
