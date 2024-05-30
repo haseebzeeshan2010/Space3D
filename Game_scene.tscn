@@ -1,28 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://c4hos6tghqw1v"]
+[gd_scene load_steps=20 format=3 uid="uid://c4hos6tghqw1v"]
 
 [ext_resource type="Texture2D" uid="uid://dsy6a7ls43nux" path="res://8k_sun.jpg" id="1_eg74v"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="2_6krv8"]
-[ext_resource type="Script" path="res://Camera3D.gd" id="3_b65qs"]
 [ext_resource type="Script" path="res://Node2D.gd" id="4_5pdbf"]
+[ext_resource type="PackedScene" uid="uid://c37lrm54fnr0b" path="res://test_ship_2.tscn" id="4_pag8e"]
+[ext_resource type="PackedScene" uid="uid://bcmpmxovtlbvh" path="res://Test_ship_1.tscn" id="5_o8lw3"]
 [ext_resource type="Texture2D" uid="uid://dnihe717jxfdg" path="res://8k_stars.jpg" id="5_qt4ow"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejosr"]
-metallic = 1.0
-metallic_texture = ExtResource("1_eg74v")
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 1.18
-emission_texture = ExtResource("1_eg74v")
-
-[sub_resource type="SphereMesh" id="SphereMesh_r6vac"]
-material = SubResource("StandardMaterial3D_ejosr")
-radius = 200.0
-height = 400.0
-radial_segments = 128
-rings = 128
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_ylvvx"]
-radius = 0.321171
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pnxbh"]
 emission_enabled = true
@@ -34,11 +17,36 @@ material = SubResource("StandardMaterial3D_pnxbh")
 height = 2.99
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h6xcg"]
+metallic_specular = 0.1
 
 [sub_resource type="TorusMesh" id="TorusMesh_yax26"]
 material = SubResource("StandardMaterial3D_h6xcg")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2shqx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejosr"]
+metallic = 1.0
+metallic_texture = ExtResource("1_eg74v")
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 1.18
+emission_texture = ExtResource("1_eg74v")
+
+[sub_resource type="SphereMesh" id="SphereMesh_r6vac"]
+material = SubResource("StandardMaterial3D_ejosr")
+radius = 50.0
+height = 100.0
+radial_segments = 128
+rings = 128
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_efwe2"]
+radius = 250.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8w466"]
+radius = 240.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ylvvx"]
+radius = 0.321171
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_najnh"]
 panorama = ExtResource("5_qt4ow")
@@ -63,60 +71,97 @@ volumetric_fog_density = 0.0001
 
 [node name="Node3D" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Spaceship" type="RigidBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 1600.3)
+linear_damp = 2.0
+angular_damp = 2.0
+script = ExtResource("2_6krv8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Spaceship"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+gi_mode = 0
+mesh = SubResource("CapsuleMesh_cxcan")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Spaceship"]
+transform = Transform3D(-0.780073, 3.57628e-07, -1.77636e-15, 0, -3.15764e-07, -1, 4.47035e-08, 7.22384, -4.37114e-08, 0, 0, 0)
+visible = false
+gi_mode = 0
+mesh = SubResource("TorusMesh_yax26")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spaceship"]
+shape = SubResource("BoxShape3D_2shqx")
+
+[node name="Camera3D" type="Camera3D" parent="Spaceship"]
+transform = Transform3D(1, 0, 0, 0, 0.968148, 0.25038, 0, -0.25038, 0.968148, 0, 9.476, 17.999)
+fov = 71.6
+
+[node name="CoordinateCheck" type="Node2D" parent="Spaceship"]
+unique_name_in_owner = true
+script = ExtResource("4_5pdbf")
+
+[node name="Ship_axis" type="Node3D" parent="Spaceship"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.847296, 0)
+
+[node name="test_ship2" parent="Spaceship/Ship_axis" instance=ExtResource("5_o8lw3")]
+transform = Transform3D(-1.7, 0, -2.56693e-07, 0, 1.7, 0, 2.56693e-07, 0, -1.7, 0, -1.19479, 0)
+
+[node name="test_ship1" parent="Spaceship/Ship_axis" instance=ExtResource("4_pag8e")]
+transform = Transform3D(-6.55671e-09, 0, -0.15, 0, 0.15, 0, 0.15, 0, -6.55671e-09, 0, 0, 0)
+visible = false
+
+[node name="Sun" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.72047, 0, 0, 0, 4.81709, 0, 0, 0, 5.16593, 0, 0, 0)
 mesh = SubResource("SphereMesh_r6vac")
 
-[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+[node name="GravityWarn" type="Area3D" parent="Sun"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sun/GravityWarn"]
+shape = SubResource("SphereShape3D_efwe2")
+
+[node name="HeatWarn" type="Area3D" parent="Sun"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sun/HeatWarn"]
+shape = SubResource("SphereShape3D_8w466")
+
+[node name="Gravity" type="Area3D" parent="Sun"]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 gravity_space_override = 1
 gravity_point = true
 gravity_point_unit_distance = 1024.0
 gravity_point_center = Vector3(0, 0, 0)
 gravity_direction = Vector3(0, 0, 0)
-gravity = 0.0
+gravity = 10.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sun/Gravity"]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 shape = SubResource("SphereShape3D_ylvvx")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Sun"]
 light_color = Color(1, 0.768627, 0.537255, 1)
 light_energy = 16.0
 light_specular = 16.0
 distance_fade_enabled = true
 distance_fade_length = 4096.0
 omni_range = 4096.0
-omni_attenuation = 0.5
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(0.274983, 0, -0.961449, 0, 1, 0, 0.961449, 0, 0.274983, 0, 0, 1600.3)
-linear_damp = 3.0
-angular_damp = 2.0
-script = ExtResource("2_6krv8")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-gi_mode = 0
-mesh = SubResource("CapsuleMesh_cxcan")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(-0.780073, 3.57628e-07, -1.77636e-15, 0, -3.15764e-07, -1, 4.47035e-08, 7.22384, -4.37114e-08, 0, 0, 0)
-gi_mode = 0
-mesh = SubResource("TorusMesh_yax26")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("BoxShape3D_2shqx")
-
-[node name="Camera3D" type="Camera3D" parent="RigidBody3D"]
-transform = Transform3D(0.999263, 0.0383878, 1.23293e-08, -0.0354401, 0.92253, 0.384295, 0.0147523, -0.384012, 0.92321, 0, 3.133, 4.86792)
-script = ExtResource("3_b65qs")
-
-[node name="CoordinateCheck" type="Node2D" parent="RigidBody3D"]
-unique_name_in_owner = true
-script = ExtResource("4_5pdbf")
+omni_attenuation = 0.57435
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wh4qx")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="test_ship2" parent="Node3D" instance=ExtResource("5_o8lw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 920)
+
+[node name="test_ship3" parent="Node3D" instance=ExtResource("5_o8lw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -248.754, 86.1765, 920)
+
+[node name="test_ship4" parent="Node3D" instance=ExtResource("5_o8lw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -118.601, 0, 1301.43)
+
+[connection signal="body_entered" from="Sun/GravityWarn" to="Spaceship" method="_on_gravity_warn_body_entered"]
+[connection signal="body_entered" from="Sun/HeatWarn" to="Spaceship" method="_on_heat_warn_body_entered"]
