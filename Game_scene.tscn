@@ -1,27 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4hos6tghqw1v"]
+[gd_scene load_steps=20 format=3 uid="uid://c4hos6tghqw1v"]
 
 [ext_resource type="Texture2D" uid="uid://dsy6a7ls43nux" path="res://8k_sun.jpg" id="1_eg74v"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="2_6krv8"]
-[ext_resource type="Texture2D" uid="uid://bcv4k5giuh1tc" path="res://line.svg" id="2_x4spo"]
 [ext_resource type="Script" path="res://Node2D.gd" id="4_5pdbf"]
 [ext_resource type="PackedScene" uid="uid://c37lrm54fnr0b" path="res://test_ship_2.tscn" id="4_pag8e"]
 [ext_resource type="PackedScene" uid="uid://bcmpmxovtlbvh" path="res://Test_ship_1.tscn" id="5_o8lw3"]
 [ext_resource type="Texture2D" uid="uid://dnihe717jxfdg" path="res://8k_stars.jpg" id="5_qt4ow"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pnxbh"]
-emission_enabled = true
-emission = Color(0.0303389, 0.815601, 1, 1)
-emission_energy_multiplier = 1.77
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_cxcan"]
-material = SubResource("StandardMaterial3D_pnxbh")
-height = 2.99
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h6xcg"]
-metallic_specular = 0.1
-
-[sub_resource type="TorusMesh" id="TorusMesh_yax26"]
-material = SubResource("StandardMaterial3D_h6xcg")
+[ext_resource type="Script" path="res://player_enemy.gd" id="7_puvbw"]
+[ext_resource type="PackedScene" uid="uid://cxah2gpjelp4f" path="res://Enemy/untitled.glb" id="8_hbrlx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2shqx"]
 
@@ -70,44 +56,24 @@ fog_light_energy = 0.0
 fog_height = -1024.0
 volumetric_fog_density = 0.0001
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e74sa"]
+emission_enabled = true
+emission = Color(0.493545, 0.493546, 0.493546, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fj0hh"]
+material = SubResource("StandardMaterial3D_e74sa")
+size = Vector3(40, 40, 40)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Spaceship" type="RigidBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 1600.3)
-linear_damp = 2.0
+unique_name_in_owner = true
+transform = Transform3D(0.986219, 0, 0.165444, 0, 1, 0, -0.165444, 0, 0.986219, 0, 0, 1600.3)
+linear_damp = 2.5
 angular_damp = 2.0
 script = ExtResource("2_6krv8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Spaceship"]
-
-[node name="TextureRect" type="TextureRect" parent="Spaceship/CanvasLayer"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -438.0
-offset_top = -55.0
-offset_right = 404.0
-offset_bottom = -21.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("2_x4spo")
-stretch_mode = 1
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Spaceship"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-visible = false
-gi_mode = 0
-mesh = SubResource("CapsuleMesh_cxcan")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Spaceship"]
-transform = Transform3D(-0.780073, 3.57628e-07, -1.77636e-15, 0, -3.15764e-07, -1, 4.47035e-08, 7.22384, -4.37114e-08, 0, 0, 0)
-visible = false
-gi_mode = 0
-mesh = SubResource("TorusMesh_yax26")
-skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spaceship"]
 shape = SubResource("BoxShape3D_2shqx")
@@ -170,16 +136,22 @@ omni_attenuation = 0.57435
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wh4qx")
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1384.23)
+linear_damp = 12.071
+angular_damp = 8.531
+script = ExtResource("7_puvbw")
 
-[node name="test_ship2" parent="Node3D" instance=ExtResource("5_o8lw3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144, 0, 920)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+visible = false
+mesh = SubResource("BoxMesh_fj0hh")
+skeleton = NodePath("../..")
 
-[node name="test_ship3" parent="Node3D" instance=ExtResource("5_o8lw3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -248.754, 86.1765, 920)
+[node name="untitled" parent="RigidBody3D" instance=ExtResource("8_hbrlx")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0)
 
-[node name="test_ship4" parent="Node3D" instance=ExtResource("5_o8lw3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -118.601, 0, 1301.43)
+[node name="Enemy_CoordinateCheck" type="Node2D" parent="RigidBody3D"]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="Sun/GravityWarn" to="Spaceship" method="_on_gravity_warn_body_entered"]
 [connection signal="body_entered" from="Sun/HeatWarn" to="Spaceship" method="_on_heat_warn_body_entered"]
