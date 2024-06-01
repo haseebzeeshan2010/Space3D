@@ -28,7 +28,9 @@ func _physics_process(delta):
 	#SHIP YAW	
 	%Ship_axis.rotation.z = lerp(%Ship_axis.rotation.z, clamp(float(%CoordinateCheck.directionx/1000),-0.2735,0.2735) , delta*2)
 	%Ship_axis.rotation.x = lerp(%Ship_axis.rotation.x, clamp(float(%CoordinateCheck.directiony/1500),-0.2,0.2) , delta*2)
-
+	
+	%ProjectileLauncher.rotation.z = lerp(%Ship_axis/ProjectileLauncher.rotation.z, clamp(float(%CoordinateCheck.directionx/-10000),-0.2735,0.2735) , delta*2)
+	%ProjectileLauncher.rotation.y = lerp(%Ship_axis/ProjectileLauncher.rotation.x, clamp(float(%CoordinateCheck.directiony/-300),-0.2,0.2) , delta*2)
 	var angle = rotation
 	
 	#if Input.is_action_pressed("mouse_click"):
@@ -36,7 +38,7 @@ func _physics_process(delta):
 		#apply_central_force(Vector3(0,%CoordinateCheck.directiony/10,0))
 		#
 	#else:
-	thrust = 40
+	thrust = 70
 	apply_central_force(Vector3(0,%CoordinateCheck.directiony/20,0))
 	
 	apply_central_force(Vector3(sin(angle.y), 0, cos(angle.y)) *-thrust)

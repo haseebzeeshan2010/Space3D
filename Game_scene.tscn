@@ -1,15 +1,26 @@
-[gd_scene load_steps=20 format=3 uid="uid://c4hos6tghqw1v"]
+[gd_scene load_steps=22 format=3 uid="uid://c4hos6tghqw1v"]
 
 [ext_resource type="Texture2D" uid="uid://dsy6a7ls43nux" path="res://8k_sun.jpg" id="1_eg74v"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="2_6krv8"]
 [ext_resource type="Script" path="res://Node2D.gd" id="4_5pdbf"]
 [ext_resource type="PackedScene" uid="uid://c37lrm54fnr0b" path="res://test_ship_2.tscn" id="4_pag8e"]
+[ext_resource type="PackedScene" uid="uid://dsw8148fpkbdq" path="res://Projectile_launcher/untitled.glb" id="5_6j033"]
 [ext_resource type="PackedScene" uid="uid://bcmpmxovtlbvh" path="res://Test_ship_1.tscn" id="5_o8lw3"]
 [ext_resource type="Texture2D" uid="uid://dnihe717jxfdg" path="res://8k_stars.jpg" id="5_qt4ow"]
 [ext_resource type="Script" path="res://player_enemy.gd" id="7_puvbw"]
 [ext_resource type="PackedScene" uid="uid://cxah2gpjelp4f" path="res://Enemy/untitled.glb" id="8_hbrlx"]
+[ext_resource type="PackedScene" uid="uid://blde8arp2kyxi" path="res://enemy_laser.tscn" id="9_gi75n"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2shqx"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jp05p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jcebe"]
+emission_enabled = true
+emission = Color(0, 0.772549, 1, 1)
+emission_energy_multiplier = 5.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_7wwhm"]
+material = SubResource("StandardMaterial3D_jcebe")
+size = Vector3(0.045, 0.075, 0.025)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejosr"]
 metallic = 1.0
@@ -56,19 +67,11 @@ fog_light_energy = 0.0
 fog_height = -1024.0
 volumetric_fog_density = 0.0001
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e74sa"]
-emission_enabled = true
-emission = Color(0.493545, 0.493546, 0.493546, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_fj0hh"]
-material = SubResource("StandardMaterial3D_e74sa")
-size = Vector3(40, 40, 40)
-
 [node name="Node3D" type="Node3D"]
 
 [node name="Spaceship" type="RigidBody3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.986219, 0, 0.165444, 0, 1, 0, -0.165444, 0, 0.986219, 0, 0, 1600.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1600.3)
 linear_damp = 2.5
 angular_damp = 2.0
 script = ExtResource("2_6krv8")
@@ -76,7 +79,8 @@ script = ExtResource("2_6krv8")
 [node name="CanvasLayer" type="CanvasLayer" parent="Spaceship"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spaceship"]
-shape = SubResource("BoxShape3D_2shqx")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_jp05p")
 
 [node name="Camera3D" type="Camera3D" parent="Spaceship"]
 transform = Transform3D(1, 0, 0, 0, 0.968148, 0.25038, 0, -0.25038, 0.968148, 0, 9.476, 17.999)
@@ -96,6 +100,38 @@ transform = Transform3D(-1.7, 0, -2.56693e-07, 0, 1.7, 0, 2.56693e-07, 0, -1.7, 
 [node name="test_ship1" parent="Spaceship/Ship_axis" instance=ExtResource("4_pag8e")]
 transform = Transform3D(-6.55671e-09, 0, -0.15, 0, 0.15, 0, 0.15, 0, -6.55671e-09, 0, 0, 0)
 visible = false
+
+[node name="Projectile_launcher_position" type="Marker3D" parent="Spaceship/Ship_axis"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.034, 5)
+
+[node name="ProjectileLauncher" parent="Spaceship/Ship_axis" instance=ExtResource("5_6j033")]
+unique_name_in_owner = true
+transform = Transform3D(-1.4972, 0, -0.0915728, 0, 1.5, 0, 0.0915728, 0, -1.4972, 0, 5.034, 5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spaceship/Ship_axis/ProjectileLauncher"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.992547, -0.121869, 0, 0.121869, 0.992546, 0.0690002, 0.33, 0.665161)
+mesh = SubResource("BoxMesh_7wwhm")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Spaceship/Ship_axis/ProjectileLauncher"]
+transform = Transform3D(0.999999, 0, -3.72529e-09, 0, 0.992547, -0.121869, 0, 0.121869, 0.992545, 0.0690079, 0.33, 0.584961)
+mesh = SubResource("BoxMesh_7wwhm")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Spaceship/Ship_axis/ProjectileLauncher"]
+transform = Transform3D(0.999999, 0, -3.72529e-09, 0, 0.992547, -0.121869, 0, 0.121869, 0.992545, 0.0690002, 0.33, 0.500122)
+mesh = SubResource("BoxMesh_7wwhm")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Spaceship/Ship_axis/ProjectileLauncher"]
+transform = Transform3D(0.999999, -9.31323e-10, 3.72529e-09, 0, 0.992547, -0.121869, 7.45058e-09, 0.121869, 0.992545, -0.168198, 0.33, 0.659058)
+mesh = SubResource("BoxMesh_7wwhm")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Spaceship/Ship_axis/ProjectileLauncher"]
+transform = Transform3D(0.999999, -1.86265e-09, -3.72529e-09, 0, 0.992547, -0.121869, 7.45058e-09, 0.121869, 0.992545, -0.16819, 0.33, 0.578979)
+mesh = SubResource("BoxMesh_7wwhm")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Spaceship/Ship_axis/ProjectileLauncher"]
+transform = Transform3D(0.999999, -1.86265e-09, -3.72529e-09, 0, 0.992547, -0.121869, 7.45058e-09, 0.121869, 0.992545, -0.168198, 0.33, 0.494141)
+mesh = SubResource("BoxMesh_7wwhm")
 
 [node name="Sun" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.72047, 0, 0, 0, 4.81709, 0, 0, 0, 5.16593, 0, 0, 0)
@@ -137,21 +173,25 @@ omni_attenuation = 0.57435
 environment = SubResource("Environment_wh4qx")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1384.23)
-linear_damp = 12.071
+transform = Transform3D(-0.998562, 0, 0.0536084, 0, 1, 0, -0.0536084, 0, -0.998562, 0, 0, 1384.23)
+linear_damp = 23.712
 angular_damp = 8.531
 script = ExtResource("7_puvbw")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-visible = false
-mesh = SubResource("BoxMesh_fj0hh")
-skeleton = NodePath("../..")
-
-[node name="untitled" parent="RigidBody3D" instance=ExtResource("8_hbrlx")]
+[node name="Enemy" parent="RigidBody3D" instance=ExtResource("8_hbrlx")]
+unique_name_in_owner = true
 transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0)
 
-[node name="Enemy_CoordinateCheck" type="Node2D" parent="RigidBody3D"]
-unique_name_in_owner = true
+[node name="Enemy_laser" parent="RigidBody3D/Enemy" instance=ExtResource("9_gi75n")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="BulletSpawn" type="Node3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39572, 5.39418, -2.36438)
+
+[node name="Timer" type="Timer" parent="RigidBody3D"]
+wait_time = 0.5
+autostart = true
 
 [connection signal="body_entered" from="Sun/GravityWarn" to="Spaceship" method="_on_gravity_warn_body_entered"]
 [connection signal="body_entered" from="Sun/HeatWarn" to="Spaceship" method="_on_heat_warn_body_entered"]
+[connection signal="timeout" from="RigidBody3D/Timer" to="RigidBody3D" method="_on_timer_timeout"]
