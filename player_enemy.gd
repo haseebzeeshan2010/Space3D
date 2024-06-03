@@ -20,7 +20,7 @@ func _physics_process(delta):
 	#%Enemy_CoordinateCheck.position = current_pos
 	#%Enemy_CoordinateCheck.rotation = rotation.y
 	#%Enemy_CoordinateCheck.rotation = %Enemy_CoordinateCheck.get_angle_to(Vector2(%Spaceship.global_position.x, %Spaceship.global_position.z))
-	print(%Spaceship.global_position.y - global_position.y)
+	#print(%Spaceship.global_position.y - global_position.y)
 	
 	#position.y = %Enemy_CoordinateCheck.rotation
 	pass

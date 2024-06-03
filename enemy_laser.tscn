@@ -7,6 +7,8 @@ radius = 0.2
 height = 10.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mt70y"]
+metallic_specular = 0.0
+roughness = 0.0
 emission_enabled = true
 emission = Color(1, 0.0588235, 0, 1)
 emission_energy_multiplier = 7.86

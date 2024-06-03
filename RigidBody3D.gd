@@ -29,8 +29,8 @@ func _physics_process(delta):
 	%Ship_axis.rotation.z = lerp(%Ship_axis.rotation.z, clamp(float(%CoordinateCheck.directionx/1000),-0.2735,0.2735) , delta*2)
 	%Ship_axis.rotation.x = lerp(%Ship_axis.rotation.x, clamp(float(%CoordinateCheck.directiony/1500),-0.2,0.2) , delta*2)
 	
-	%ProjectileLauncher.rotation.z = lerp(%Ship_axis/ProjectileLauncher.rotation.z, clamp(float(%CoordinateCheck.directionx/-10000),-0.2735,0.2735) , delta*2)
-	%ProjectileLauncher.rotation.y = lerp(%Ship_axis/ProjectileLauncher.rotation.x, clamp(float(%CoordinateCheck.directiony/-300),-0.2,0.2) , delta*2)
+	#%ProjectileLauncher.look_at(%Enemy.global_position)
+	
 	var angle = rotation
 	
 	#if Input.is_action_pressed("mouse_click"):
