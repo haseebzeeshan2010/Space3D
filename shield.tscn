@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://lyclxg65gxe3"]
+
+[ext_resource type="Shader" uid="uid://r52pht22ydpp" path="res://Shaders/shield.tres" id="1_4xaqr"]
+[ext_resource type="ArrayMesh" uid="uid://cxfr8fq0ko6q8" path="res://EnergyShield/shield.obj" id="2_ro8on"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xjqcd"]
+render_priority = 0
+shader = ExtResource("1_4xaqr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_717ex"]
+gravity = Vector3(0, 0, 0)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_xjqcd")
+amount = 1
+lifetime = 5.0
+process_material = SubResource("ParticleProcessMaterial_717ex")
+draw_pass_1 = ExtResource("2_ro8on")

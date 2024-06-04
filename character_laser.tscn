@@ -1,34 +1,61 @@
-[gd_scene load_steps=5 format=3 uid="uid://dedxsosdilx21"]
+[gd_scene load_steps=7 format=3 uid="uid://dedxsosdilx21"]
 
 [ext_resource type="Script" path="res://enemy_lasers.gd" id="1_dcj4n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j2fvh"]
 radius = 0.2
-height = 10.0
+height = 4.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bkw5p"]
+albedo_color = Color(1, 1, 1, 0)
+metallic_specular = 0.0
+roughness = 0.0
 emission_enabled = true
 emission = Color(0, 0.607843, 1, 1)
-emission_energy_multiplier = 2.58
+emission_energy_multiplier = 5.74
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xu2xb"]
 material = SubResource("StandardMaterial3D_bkw5p")
 radius = 0.2
-height = 10.0
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mt70y"]
+metallic_specular = 0.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(1, 0.0588235, 0, 1)
+emission_energy_multiplier = 7.86
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1y55i"]
+material = SubResource("StandardMaterial3D_mt70y")
+radius = 0.2
+height = 4.0
 
 [node name="Character_laser" type="RigidBody3D"]
 top_level = true
 script = ExtResource("1_dcj4n")
 
 [node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.682891, -5.58239)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_j2fvh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(-1, -8.74228e-08, 0, -3.82137e-15, 4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_xu2xb")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(-1, -8.74228e-08, 0, -3.82137e-15, 4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_1y55i")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(-1, -8.74228e-08, 0, -3.82137e-15, 4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_1y55i")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0

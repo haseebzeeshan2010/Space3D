@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://mudjuyp2h1u1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n6wfm"]
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_q2r3a"]
+material = SubResource("StandardMaterial3D_n6wfm")
+inner_radius = 0.864
+outer_radius = 1.315
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1h6pa"]
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hyn0j"]
+material = SubResource("StandardMaterial3D_1h6pa")
+radius = 1.495
+height = 2.99
+
+[node name="crosshair" type="Node3D"]
+
+[node name="Torus_001" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0012217, -0.999999, 0, 0.999999, -0.0012217, 0, 0, 0)
+mesh = SubResource("TorusMesh_q2r3a")
+skeleton = NodePath("")
+
+[node name="Cylinder_001" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8.54939e-09, 0.584914, 0, 0.000238949, 3.12378e-11, -0.195587, -0.195587, -2.55674e-08, -0.000238949, -1.29252, 0, 0)
+mesh = SubResource("CapsuleMesh_hyn0j")
+skeleton = NodePath("")
+
+[node name="Cylinder_002" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8.54939e-09, 0.584914, 0, 0.000238949, 3.12378e-11, -0.195587, -0.195587, -2.55674e-08, -0.000238949, 1.293, 0, 0)
+mesh = SubResource("CapsuleMesh_hyn0j")
+skeleton = NodePath("")
+
+[node name="Cylinder_003" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.37194e-11, -0.0029911, -0.195585, 0.000238957, -0.584906, 0.00100018, -0.195587, -0.000714606, 1.22183e-06, 0.00685081, 1.29274, 0.00157934)
+mesh = SubResource("CapsuleMesh_hyn0j")
+skeleton = NodePath("")
+
+[node name="Cylinder_004" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.37194e-11, -0.0029911, -0.195585, 0.000238957, -0.584906, 0.00100018, -0.195587, -0.000714606, 1.22183e-06, -0.00637087, -1.29274, -0.00157934)
+mesh = SubResource("CapsuleMesh_hyn0j")
+skeleton = NodePath("")

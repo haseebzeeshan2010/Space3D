@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4hos6tghqw1v"]
+[gd_scene load_steps=26 format=3 uid="uid://c4hos6tghqw1v"]
 
 [ext_resource type="Texture2D" uid="uid://dsy6a7ls43nux" path="res://8k_sun.jpg" id="1_eg74v"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="2_6krv8"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://Projectilelauncher.gd" id="7_v5ibr"]
 [ext_resource type="PackedScene" uid="uid://cxah2gpjelp4f" path="res://Enemy/untitled.glb" id="8_hbrlx"]
 [ext_resource type="PackedScene" uid="uid://blde8arp2kyxi" path="res://enemy_laser.tscn" id="9_gi75n"]
+[ext_resource type="PackedScene" uid="uid://mudjuyp2h1u1" path="res://crosshair.tscn" id="13_8c5ca"]
+[ext_resource type="Script" path="res://crosshair.gd" id="14_qfv13"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jp05p"]
 
@@ -110,12 +112,16 @@ visible = false
 
 [node name="ProjectileLauncher" parent="Spaceship/Ship_axis" instance=ExtResource("5_cfl8h")]
 unique_name_in_owner = true
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 5.07539, 5.69812)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 5.07539, 5.69812)
 script = ExtResource("7_v5ibr")
 
 [node name="direction_fire_smoother" type="Node3D" parent="Spaceship/Ship_axis"]
 unique_name_in_owner = true
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 5.07539, 5.69812)
+
+[node name="Timer" type="Timer" parent="Spaceship"]
+wait_time = 0.25
+autostart = true
 
 [node name="Sun" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.72047, 0, 0, 0, 4.81709, 0, 0, 0, 5.16593, 0, 0, 0)
@@ -145,13 +151,15 @@ transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 shape = SubResource("SphereShape3D_ylvvx")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Sun"]
+transform = Transform3D(0.211843, 0, 0, 0, 0.207594, 0, 0, 0, 0.193576, 0, 0, 0)
 light_color = Color(1, 0.768627, 0.537255, 1)
 light_energy = 16.0
 light_specular = 16.0
+light_bake_mode = 1
 distance_fade_enabled = true
 distance_fade_length = 4096.0
 omni_range = 4096.0
-omni_attenuation = 0.57435
+omni_attenuation = 0.406127
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wh4qx")
@@ -181,8 +189,15 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.968148, 0.25038, 0, -0.25038, 0.968148, 0, 9.476, 1618.3)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Projectile_launcher_position"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 mesh = SubResource("BoxMesh_lc5nf")
 
+[node name="crosshair" parent="Projectile_launcher_position" instance=ExtResource("13_8c5ca")]
+transform = Transform3D(1, 0, 0, 0, -0.25038, -0.968147, 0, 0.968147, -0.25038, -0.0199308, -0.0227356, -0.00549316)
+script = ExtResource("14_qfv13")
+
+[connection signal="timeout" from="Spaceship/Timer" to="Spaceship" method="_on_timer_timeout_char"]
 [connection signal="body_entered" from="Sun/GravityWarn" to="Spaceship" method="_on_gravity_warn_body_entered"]
 [connection signal="body_entered" from="Sun/HeatWarn" to="Spaceship" method="_on_heat_warn_body_entered"]
 [connection signal="timeout" from="RigidBody3D/Timer" to="RigidBody3D" method="_on_timer_timeout"]

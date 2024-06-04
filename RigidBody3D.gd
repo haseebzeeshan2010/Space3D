@@ -1,5 +1,5 @@
 extends RigidBody3D
-
+@onready var bullet_scene = preload("res://character_laser.tscn")
 var impulse_strength = 0
 var thrust = 70
 
@@ -8,6 +8,7 @@ func _physics_process(delta):
 	#rotation = Vector3(Vector2((get_viewport().get_mouse_position() - position.xy).angle), 0)
 	#print(get_angle_to(get_viewport().get_mouse_position()))
 	#set_linear_damp(1.4)
+	
 	impulse_strength = 38
 	var m = %CoordinateCheck.get_global_mouse_position()
 	var aim_speed = deg_to_rad(1)
@@ -43,7 +44,6 @@ func _physics_process(delta):
 	
 	apply_central_force(Vector3(sin(angle.y), 0, cos(angle.y)) *-thrust)
 
-
 func _on_heat_warn_body_entered(body):
 	print("TOOHOOTT")
 	pass # Replace with function body.
@@ -52,3 +52,16 @@ func _on_heat_warn_body_entered(body):
 func _on_gravity_warn_body_entered(body):
 	print("NOOOOO")
 	pass # Replace with function body.
+
+
+
+
+
+func _on_timer_timeout_char():
+	if Input.is_action_pressed("mouse_click"):
+		var projectile = bullet_scene.instantiate()
+		projectile.position = %ProjectileLauncher.position
+		projectile.rotation = %ProjectileLauncher.rotation
+		%ProjectileLauncher.add_sibling(projectile)
+	
+
