@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://csh2u1eqp80rn"
+path="res://.godot/imported/shieldborder.obj-2eb811b23cb68bd8afe469e55bb870f6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/shieldborder.obj-2eb811b23cb68bd8afe469e55bb870f6.mesh"]
+
+source_file="res://EnergyShield/shieldborder.obj"
+dest_files=["res://.godot/imported/shieldborder.obj-2eb811b23cb68bd8afe469e55bb870f6.mesh", "res://.godot/imported/shieldborder.obj-2eb811b23cb68bd8afe469e55bb870f6.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

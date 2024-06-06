@@ -1,21 +1,72 @@
-[gd_scene load_steps=5 format=3 uid="uid://lyclxg65gxe3"]
+[gd_scene load_steps=13 format=3 uid="uid://lyclxg65gxe3"]
 
 [ext_resource type="Shader" uid="uid://r52pht22ydpp" path="res://Shaders/shield.tres" id="1_4xaqr"]
+[ext_resource type="Texture2D" uid="uid://chae743bf08c0" path="res://EnergyShield/Dots01_tuts.png" id="2_gvldq"]
 [ext_resource type="ArrayMesh" uid="uid://cxfr8fq0ko6q8" path="res://EnergyShield/shield.obj" id="2_ro8on"]
+[ext_resource type="Texture2D" uid="uid://ylmv8l48um3i" path="res://EnergyShield/Noise.png" id="3_v4dpo"]
+[ext_resource type="Texture2D" uid="uid://dnihe717jxfdg" path="res://8k_stars.jpg" id="5_lo2uv"]
+[ext_resource type="ArrayMesh" uid="uid://csh2u1eqp80rn" path="res://EnergyShield/shieldborder.obj" id="6_derbw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xjqcd"]
 render_priority = 0
 shader = ExtResource("1_4xaqr")
+shader_parameter/Vector2Parameter = Vector2(1.6, 1)
+shader_parameter/NoiseSpeed = Vector2(0, 0.5)
+shader_parameter/NoisePower = 3.0
+shader_parameter/MaskPower = 1.855
+shader_parameter/MainTex = ExtResource("2_gvldq")
+shader_parameter/Noise = ExtResource("3_v4dpo")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_717ex"]
 gravity = Vector3(0, 0, 0)
+color = Color(2.115, 7.137, 18, 1)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jvdd5"]
+panorama = ExtResource("5_lo2uv")
+
+[sub_resource type="Sky" id="Sky_dmcn1"]
+sky_material = SubResource("PanoramaSkyMaterial_jvdd5")
+
+[sub_resource type="Environment" id="Environment_2srf0"]
+background_mode = 2
+sky = SubResource("Sky_dmcn1")
+ambient_light_source = 2
+ambient_light_color = Color(0.133196, 0.133196, 0.133196, 1)
+ambient_light_energy = 0.5
+glow_enabled = true
+glow_intensity = 0.63
+glow_strength = 0.98
+glow_bloom = 0.07
+glow_blend_mode = 0
+fog_light_energy = 0.0
+fog_height = -1024.0
+volumetric_fog_density = 0.0001
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_th8w0"]
+emission_enabled = true
+emission = Color(1, 0.654902, 0, 1)
+emission_energy_multiplier = 2.8
 
 [node name="Node3D" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_xjqcd")
+gi_mode = 2
 amount = 1
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_717ex")
 draw_pass_1 = ExtResource("2_ro8on")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2srf0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("6_derbw")
+surface_material_override/0 = SubResource("StandardMaterial3D_th8w0")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+layers = 4
+spot_range = 2.0
+spot_angle = 89.99

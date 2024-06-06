@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c4hos6tghqw1v"]
+[gd_scene load_steps=27 format=3 uid="uid://c4hos6tghqw1v"]
 
 [ext_resource type="Texture2D" uid="uid://dsy6a7ls43nux" path="res://8k_sun.jpg" id="1_eg74v"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="2_6krv8"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dnihe717jxfdg" path="res://8k_stars.jpg" id="5_qt4ow"]
 [ext_resource type="Script" path="res://player_enemy.gd" id="7_puvbw"]
 [ext_resource type="Script" path="res://Projectilelauncher.gd" id="7_v5ibr"]
+[ext_resource type="PackedScene" uid="uid://lyclxg65gxe3" path="res://shield.tscn" id="8_gujk4"]
 [ext_resource type="PackedScene" uid="uid://cxah2gpjelp4f" path="res://Enemy/untitled.glb" id="8_hbrlx"]
 [ext_resource type="PackedScene" uid="uid://blde8arp2kyxi" path="res://enemy_laser.tscn" id="9_gi75n"]
 [ext_resource type="PackedScene" uid="uid://mudjuyp2h1u1" path="res://crosshair.tscn" id="13_8c5ca"]
@@ -47,12 +48,12 @@ radius = 0.321171
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_najnh"]
 panorama = ExtResource("5_qt4ow")
 
-[sub_resource type="Sky" id="Sky_dmcn1"]
+[sub_resource type="Sky" id="Sky_7jopt"]
 sky_material = SubResource("PanoramaSkyMaterial_najnh")
 
 [sub_resource type="Environment" id="Environment_wh4qx"]
 background_mode = 2
-sky = SubResource("Sky_dmcn1")
+sky = SubResource("Sky_7jopt")
 ambient_light_source = 2
 ambient_light_color = Color(0.133196, 0.133196, 0.133196, 1)
 ambient_light_energy = 0.5
@@ -123,6 +124,9 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 5.07539, 5.69812)
 wait_time = 0.25
 autostart = true
 
+[node name="Shield" parent="Spaceship" instance=ExtResource("8_gujk4")]
+transform = Transform3D(10, 0, 0, 0, 6.88355, 7.25374, 0, -7.25374, 6.88355, 2, 1, -25.3)
+
 [node name="Sun" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.72047, 0, 0, 0, 4.81709, 0, 0, 0, 5.16593, 0, 0, 0)
 mesh = SubResource("SphereMesh_r6vac")
@@ -189,7 +193,6 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.968148, 0.25038, 0, -0.25038, 0.968148, 0, 9.476, 1618.3)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Projectile_launcher_position"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 mesh = SubResource("BoxMesh_lc5nf")
 
