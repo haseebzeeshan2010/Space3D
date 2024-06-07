@@ -31,8 +31,8 @@ emission_texture = ExtResource("1_eg74v")
 
 [sub_resource type="SphereMesh" id="SphereMesh_r6vac"]
 material = SubResource("StandardMaterial3D_ejosr")
-radius = 50.0
-height = 100.0
+radius = 100.0
+height = 200.0
 radial_segments = 128
 rings = 128
 
@@ -120,12 +120,15 @@ script = ExtResource("7_v5ibr")
 unique_name_in_owner = true
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 5.07539, 5.69812)
 
+[node name="Shield" parent="Spaceship/Ship_axis" instance=ExtResource("8_gujk4")]
+transform = Transform3D(0.417096, 4.96641, 0.400992, -0.0321593, -0.399703, 4.98389, 4.98246, -0.418333, -0.00139964, 6, 3.456, 3.485)
+
+[node name="Shield2" parent="Spaceship/Ship_axis" instance=ExtResource("8_gujk4")]
+transform = Transform3D(0.417097, -4.96641, -0.400992, 0.0321593, -0.399703, 4.98389, -4.98246, -0.418334, -0.00139971, -6, 3.456, 3.485)
+
 [node name="Timer" type="Timer" parent="Spaceship"]
 wait_time = 0.25
 autostart = true
-
-[node name="Shield" parent="Spaceship" instance=ExtResource("8_gujk4")]
-transform = Transform3D(10, 0, 0, 0, 6.88355, 7.25374, 0, -7.25374, 6.88355, 2, 1, -25.3)
 
 [node name="Sun" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.72047, 0, 0, 0, 4.81709, 0, 0, 0, 5.16593, 0, 0, 0)
@@ -163,7 +166,7 @@ light_bake_mode = 1
 distance_fade_enabled = true
 distance_fade_length = 4096.0
 omni_range = 4096.0
-omni_attenuation = 0.406127
+omni_attenuation = 0.432376
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wh4qx")
@@ -198,6 +201,7 @@ mesh = SubResource("BoxMesh_lc5nf")
 
 [node name="crosshair" parent="Projectile_launcher_position" instance=ExtResource("13_8c5ca")]
 transform = Transform3D(1, 0, 0, 0, -0.25038, -0.968147, 0, 0.968147, -0.25038, -0.0199308, -0.0227356, -0.00549316)
+visible = false
 script = ExtResource("14_qfv13")
 
 [connection signal="timeout" from="Spaceship/Timer" to="Spaceship" method="_on_timer_timeout_char"]
