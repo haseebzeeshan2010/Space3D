@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c4hos6tghqw1v"]
+[gd_scene load_steps=28 format=3 uid="uid://c4hos6tghqw1v"]
 
 [ext_resource type="Texture2D" uid="uid://dsy6a7ls43nux" path="res://8k_sun.jpg" id="1_eg74v"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="2_6krv8"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Projectilelauncher.gd" id="7_v5ibr"]
 [ext_resource type="PackedScene" uid="uid://lyclxg65gxe3" path="res://shield.tscn" id="8_gujk4"]
 [ext_resource type="PackedScene" uid="uid://cxah2gpjelp4f" path="res://Enemy/untitled.glb" id="8_hbrlx"]
+[ext_resource type="Script" path="res://Shield_position.gd" id="8_o1ggs"]
 [ext_resource type="PackedScene" uid="uid://blde8arp2kyxi" path="res://enemy_laser.tscn" id="9_gi75n"]
 [ext_resource type="PackedScene" uid="uid://mudjuyp2h1u1" path="res://crosshair.tscn" id="13_8c5ca"]
 [ext_resource type="Script" path="res://crosshair.gd" id="14_qfv13"]
@@ -100,6 +101,22 @@ shape = SubResource("BoxShape3D_km1j2")
 unique_name_in_owner = true
 script = ExtResource("4_5pdbf")
 
+[node name="Shield_position" type="Node3D" parent="Spaceship"]
+script = ExtResource("8_o1ggs")
+
+[node name="Shield" parent="Spaceship/Shield_position" instance=ExtResource("8_gujk4")]
+transform = Transform3D(4.99987, 0.0349054, -1.90484e-08, 1.7528e-08, 2.17853e-07, 4.99999, 0.0349053, -4.99988, 2.17725e-07, -0.582164, 4.303, -13.9116)
+visible = false
+
+[node name="Shield2" parent="Spaceship/Shield_position" instance=ExtResource("8_gujk4")]
+transform = Transform3D(3.81858, -3.11971, 0.828118, 0.585123, 1.93062, 4.57496, -3.17426, -3.39708, 1.83953, -5.0973, 3.72706, -6.6366)
+
+[node name="Shield3" parent="Spaceship/Shield_position" instance=ExtResource("8_gujk4")]
+transform = Transform3D(3.97296, 2.92558, -0.810239, -0.49477, 1.94071, 4.58135, 2.99511, -3.56014, 1.83157, 5.097, 3.82065, -6.72217)
+
+[node name="Enemy_lock" type="Node3D" parent="Spaceship/Shield_position"]
+unique_name_in_owner = true
+
 [node name="Ship_axis" type="Node3D" parent="Spaceship"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.847296, 0)
@@ -119,12 +136,6 @@ script = ExtResource("7_v5ibr")
 [node name="direction_fire_smoother" type="Node3D" parent="Spaceship/Ship_axis"]
 unique_name_in_owner = true
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 5.07539, 5.69812)
-
-[node name="Shield" parent="Spaceship/Ship_axis" instance=ExtResource("8_gujk4")]
-transform = Transform3D(0.417096, 4.96641, 0.400992, -0.0321593, -0.399703, 4.98389, 4.98246, -0.418333, -0.00139964, 6, 3.456, 3.485)
-
-[node name="Shield2" parent="Spaceship/Ship_axis" instance=ExtResource("8_gujk4")]
-transform = Transform3D(0.417097, -4.96641, -0.400992, 0.0321593, -0.399703, 4.98389, -4.98246, -0.418334, -0.00139971, -6, 3.456, 3.485)
 
 [node name="Timer" type="Timer" parent="Spaceship"]
 wait_time = 0.25
@@ -185,7 +196,7 @@ transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="BulletSpawn" type="Node3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39572, 5.39418, -2.36438)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.535667, 5.39418, -2.21082)
 
 [node name="Timer" type="Timer" parent="RigidBody3D"]
 wait_time = 0.5
@@ -200,6 +211,7 @@ visible = false
 mesh = SubResource("BoxMesh_lc5nf")
 
 [node name="crosshair" parent="Projectile_launcher_position" instance=ExtResource("13_8c5ca")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -0.25038, -0.968147, 0, 0.968147, -0.25038, -0.0199308, -0.0227356, -0.00549316)
 visible = false
 script = ExtResource("14_qfv13")

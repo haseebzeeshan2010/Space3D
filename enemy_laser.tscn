@@ -22,9 +22,11 @@ height = 10.0
 top_level = true
 script = ExtResource("1_yj7k7")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Laser_Collision" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Laser_Collision"]
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_j2fvh")
 
@@ -36,4 +38,5 @@ mesh = SubResource("CapsuleMesh_vk2kd")
 wait_time = 10.0
 autostart = true
 
+[connection signal="body_entered" from="Laser_Collision" to="." method="_on_laser_collision_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

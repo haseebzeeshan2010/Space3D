@@ -20,7 +20,7 @@ func _physics_process(delta):
 	#var angle = rotation
 	#print(%direction_fire_smoother.get_rotation())
 	var r = Vector3(clamp(%direction_fire_smoother.rotation.x, -0.10,4), %direction_fire_smoother.rotation.y, %direction_fire_smoother.rotation.z)
-	print(r)
+	#print(r)
 	rotation = lerp(rotation, r, delta*2)
 	
 	%direction_fire_smoother.look_at(%Projectile_launcher_position.global_position)

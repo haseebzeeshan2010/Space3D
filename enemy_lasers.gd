@@ -8,3 +8,8 @@ func _physics_process(delta):
 func _on_timer_timeout():
 	queue_free()
 	pass # Replace with function body.
+
+
+func _on_laser_collision_body_entered(body):
+	queue_free()
+	pass # Replace with function body.

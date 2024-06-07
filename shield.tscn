@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://lyclxg65gxe3"]
+[gd_scene load_steps=16 format=3 uid="uid://lyclxg65gxe3"]
 
 [ext_resource type="Shader" uid="uid://r52pht22ydpp" path="res://Shaders/shield.tres" id="1_4xaqr"]
 [ext_resource type="Texture2D" uid="uid://chae743bf08c0" path="res://EnergyShield/Dots01_tuts.png" id="2_gvldq"]
@@ -46,6 +46,7 @@ volumetric_fog_density = 0.0001
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_th8w0"]
 transparency = 1
 albedo_color = Color(2.161, 4.325, 20.541, 0.01)
+metallic = 0.49
 emission = Color(0, 0.283333, 1, 1)
 emission_energy_multiplier = 5.7
 
@@ -55,9 +56,12 @@ shader = ExtResource("7_laa0u")
 shader_parameter/Vector2Parameter = Vector2(2, 1)
 shader_parameter/NoiseSpeed = Vector2(0, 0.25)
 shader_parameter/NoisePower = 8.715
-shader_parameter/MaskPower = 6.975
+shader_parameter/MaskPower = 2.83
 shader_parameter/MainTex = ExtResource("2_gvldq")
 shader_parameter/Noise = ExtResource("3_v4dpo")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hnwia"]
+size = Vector3(0.58783, 2.74652, 1.68359)
 
 [node name="Node3D" type="Node3D"]
 
@@ -81,3 +85,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_th8w0")
 gi_mode = 0
 mesh = ExtResource("2_ro8on")
 surface_material_override/0 = SubResource("ShaderMaterial_epa43")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Shield"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shield/StaticBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.028656, 0.541831, -0.0175781)
+shape = SubResource("BoxShape3D_hnwia")

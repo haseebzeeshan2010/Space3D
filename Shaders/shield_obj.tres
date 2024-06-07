@@ -193,7 +193,7 @@ void fragment() {
 
 
 // ColorConstant:24
-	vec4 n_out24p0 = vec4(0.000000, 3.244000, 27.025002, 1.000000);
+	vec4 n_out24p0 = vec4(0.000000, 3.244000, 27.025000, 1.000000);
 
 
 // Output:0
@@ -204,7 +204,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(1445.46, -49.4944)
 nodes/fragment/0/position = Vector2(1680, -320)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_7e24q")
 nodes/fragment/2/position = Vector2(-1409.27, -276.383)
