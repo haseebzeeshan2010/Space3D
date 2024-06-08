@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://enemy_lasers.gd" id="1_yj7k7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j2fvh"]
+margin = 0.02
 radius = 0.2
 height = 10.0
 
@@ -23,6 +24,7 @@ top_level = true
 script = ExtResource("1_yj7k7")
 
 [node name="Laser_Collision" type="Area3D" parent="."]
+unique_name_in_owner = true
 collision_layer = 2
 collision_mask = 2
 
@@ -34,9 +36,18 @@ shape = SubResource("CapsuleShape3D_j2fvh")
 transform = Transform3D(-1, -8.74228e-08, 0, -3.82137e-15, 4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_vk2kd")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-8.61968, -4.05118e-09, 0, -3.2939e-14, 2.02559e-09, 1, -7.53557e-07, 0.0463401, -4.37114e-08, 0, 0, 5.28685)
+visible = false
+mesh = SubResource("CapsuleMesh_vk2kd")
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
+
+[node name="Node3D" type="Node3D" parent="."]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="Laser_Collision" to="." method="_on_laser_collision_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
