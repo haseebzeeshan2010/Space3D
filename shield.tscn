@@ -93,3 +93,4 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Shield/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_5gnhy")
+disabled = true

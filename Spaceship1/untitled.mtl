@@ -1,0 +1,48 @@
+# Blender 4.1.0 MTL File: 'None'
+# www.blender.org
+
+newmtl back_ext
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd 1005_BaseColor.jpg
+map_Ns 1005_Roughness.jpg
+map_refl 1005_Metallic.jpg
+map_Bump -bm 1.000000 1005_Normal_OpenGL.jpg
+
+newmtl front_ext
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd 1001_BaseColor.png
+map_Ns 1001_Roughness.jpg
+map_refl 1001_Metallic.jpg
+map_Bump -bm 1.000000 1001_Normal_OpenGL.jpg
+
+newmtl glass
+Ns 360.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl mid_ext
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd 1002_BaseColor.jpg
+map_Ns 1002_Roughness.jpg
+map_refl 1002_Metallic.jpg
+map_Bump -bm 1.000000 1002_Normal_OpenGL.jpg

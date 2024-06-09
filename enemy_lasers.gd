@@ -14,9 +14,10 @@ func _on_timer_timeout():
 func _on_laser_collision_body_entered(body):
 	var projectile = bullet_explosion.instantiate()
 	#projectile.position = position
-	print(body.to_local(global_position))
-	#projectile.position = (projectile.global_position - body.global_position)
 	projectile.position = body.to_local(%MeshInstance3D2.global_position)
+	print(body.to_local(%MeshInstance3D2.global_position))
+	#projectile.position = (projectile.global_position - body.global_position)
+	
 	body.add_sibling(projectile)
 	
 	queue_free()

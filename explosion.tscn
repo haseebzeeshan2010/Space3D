@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://fi4x3d74vuyt"]
+[gd_scene load_steps=4 format=3 uid="uid://fi4x3d74vuyt"]
+
+[ext_resource type="Script" path="res://explosion.gd" id="1_33kr0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qelrc"]
 emission_enabled = true
@@ -7,14 +9,13 @@ emission_energy_multiplier = 4.52
 
 [sub_resource type="SphereMesh" id="SphereMesh_f5kyp"]
 material = SubResource("StandardMaterial3D_qelrc")
-radius = 0.1
-height = 0.2
+radius = 0.2
+height = 0.4
 
 [node name="Explosion" type="Node3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+script = ExtResource("1_33kr0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.42, 0, 0, 0, 0.4, 0, 0, 0, 0.22, 0, 0, 0)
 mesh = SubResource("SphereMesh_f5kyp")
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
