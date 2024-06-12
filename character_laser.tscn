@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dedxsosdilx21"]
 
-[ext_resource type="Script" path="res://enemy_lasers.gd" id="1_dcj4n"]
+[ext_resource type="Script" path="res://character_laser.gd" id="1_11ert"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j2fvh"]
 radius = 0.2
@@ -33,10 +33,12 @@ height = 4.0
 
 [node name="Character_laser" type="RigidBody3D"]
 top_level = true
-script = ExtResource("1_dcj4n")
+script = ExtResource("1_11ert")
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.682891, -5.58239)
+collision_layer = 5
+collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
@@ -61,4 +63,5 @@ mesh = SubResource("CapsuleMesh_1y55i")
 wait_time = 10.0
 autostart = true
 
+[connection signal="body_entered" from="Area3D" to="." method="_on_laser_collision_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://blde8arp2kyxi"]
+[gd_scene load_steps=11 format=3 uid="uid://blde8arp2kyxi"]
 
 [ext_resource type="Script" path="res://enemy_lasers.gd" id="1_yj7k7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j2fvh"]
-margin = 0.02
 radius = 0.2
 height = 10.0
 
@@ -18,6 +17,38 @@ emission_energy_multiplier = 7.86
 material = SubResource("StandardMaterial3D_kc8vl")
 radius = 0.2
 height = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6sd1"]
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 11.97
+
+[sub_resource type="Curve" id="Curve_25le4"]
+_data = [Vector2(0, 0.593407), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_iarne"]
+curve = SubResource("Curve_25le4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8c8rk"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 10.0
+radial_accel_max = 709.45
+scale_curve = SubResource("CurveTexture_iarne")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p647v"]
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 15.12
+
+[sub_resource type="SphereMesh" id="SphereMesh_wloh8"]
+material = SubResource("StandardMaterial3D_p647v")
+radius = 0.063
+height = 0.125
 
 [node name="Enemy_laser" type="RigidBody3D"]
 top_level = true
@@ -36,9 +67,22 @@ shape = SubResource("CapsuleShape3D_j2fvh")
 transform = Transform3D(-1, -8.74228e-08, 0, -3.82137e-15, 4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_vk2kd")
 
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-8.61968, -4.05118e-09, -1.14081e-21, -3.2939e-14, 2.02559e-09, 1, -7.53557e-07, 0.0463401, -4.37114e-08, 0, 0, -4.65608)
+material_override = SubResource("StandardMaterial3D_o6sd1")
+cast_shadow = 0
+emitting = false
+amount = 17
+lifetime = 0.66
+one_shot = true
+explosiveness = 0.12
+process_material = SubResource("ParticleProcessMaterial_8c8rk")
+draw_pass_1 = SubResource("SphereMesh_wloh8")
+
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-8.61968, -4.05118e-09, 0, -3.2939e-14, 2.02559e-09, 1, -7.53557e-07, 0.0463401, -4.37114e-08, 0, 0, 4.54577)
+transform = Transform3D(-8.61968, -4.05118e-09, 0, -3.2939e-14, 2.02559e-09, 1, -7.53557e-07, 0.0463401, -4.37114e-08, 0, 0, -4.65608)
 visible = false
 mesh = SubResource("CapsuleMesh_vk2kd")
 
