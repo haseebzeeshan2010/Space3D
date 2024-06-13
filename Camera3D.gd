@@ -21,5 +21,6 @@ func shoot_ray():
 		new_pos = Vector3(raycast_results["position"].x, raycast_results["position"].y, global_position.z-41)
 		#print(new_pos)
 		%Projectile_launcher_position.position = raycast_results["position"]
+		print(raycast_results)
 	#set_global_transform(get_parent().get_global_transform())
 	

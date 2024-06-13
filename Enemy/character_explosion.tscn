@@ -8,13 +8,13 @@ albedo_color = Color(1, 1, 1, 0.0392157)
 metallic = 1.0
 metallic_specular = 0.0
 emission_enabled = true
-emission = Color(0, 0.341176, 1, 1)
+emission = Color(0, 0.572549, 1, 1)
 emission_energy_multiplier = 200.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_xocxs"]
 material = SubResource("StandardMaterial3D_xqr21")
-radius = 0.2
-height = 0.4
+radius = 0.1
+height = 0.2
 
 [node name="Explosion" type="Node3D"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
