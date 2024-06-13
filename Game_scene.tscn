@@ -728,6 +728,7 @@ mesh = ExtResource("20_ldm66")
 transform = Transform3D(1, -5.96046e-07, 0, -1.19209e-07, 1, 0, 2.83122e-07, 2.38419e-07, 1, 549.328, 673.601, 265.657)
 shape = SubResource("ConvexPolygonShape3D_fpml1")
 
+[connection signal="input_event" from="Spaceship/Camera3D/Direction_Plane" to="Spaceship/Camera3D" method="_on_direction_plane_input_event"]
 [connection signal="timeout" from="Spaceship/Timer" to="Spaceship" method="_on_timer_timeout_char"]
 [connection signal="body_entered" from="Sun/GravityWarn" to="Spaceship" method="_on_gravity_warn_body_entered"]
 [connection signal="body_entered" from="Sun/HeatWarn" to="Spaceship" method="_on_heat_warn_body_entered"]
