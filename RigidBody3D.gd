@@ -43,6 +43,17 @@ func _physics_process(delta):
 	apply_central_force(Vector3(0,%CoordinateCheck.directiony/20,0))
 	
 	apply_central_force(Vector3(sin(angle.y), 0, cos(angle.y)) *-thrust)
+	
+	
+	if Input.is_action_pressed("mouse_click"):
+		%EnergyBar.set_value(%EnergyBar.get_value() - 10 * delta)
+	else:
+		%EnergyBar.set_value(%EnergyBar.get_value() + 5 * delta)
+	
+	print(%EnergyBar.get_value())
+	if %EnergyBar.get_value() == 100:
+		%HealthBar.set_value(%HealthBar.get_value() + 5 * delta)
+	
 
 func _on_heat_warn_body_entered(body):
 	print("TOOHOOTT")
@@ -63,5 +74,5 @@ func _on_timer_timeout_char():
 		projectile.position = %ProjectileLauncher.position
 		projectile.rotation = %ProjectileLauncher.rotation
 		%ProjectileLauncher.add_sibling(projectile)
-	
+		
 

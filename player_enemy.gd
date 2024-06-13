@@ -15,7 +15,7 @@ func _physics_process(delta):
 	var angle = rotation
 	#var current_pos = Vector2(global_position.x,global_position.z)
 	#
-	add_constant_force(Vector3(sin(angle.y), (%Spaceship.global_position.y - global_position.y)/-100, cos(angle.y)) * -4)
+	add_constant_force(Vector3(sin(angle.y), (%Spaceship.global_position.y - global_position.y)/-100, cos(angle.y)) * -8)
 	##constant_torque = Vector3(0,%Enemy_CoordinateCheck.get_angle_to(Vector2(%Spaceship.global_position.x, %Spaceship.global_position.z))*5,0)
 	#%Enemy_CoordinateCheck.position = current_pos
 	#%Enemy_CoordinateCheck.rotation = rotation.y
