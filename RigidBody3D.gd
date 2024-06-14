@@ -10,8 +10,7 @@ func _physics_process(delta):
 	#set_linear_damp(1.4)
 	
 	impulse_strength = 38
-	var m = %CoordinateCheck.get_global_mouse_position()
-	var aim_speed = deg_to_rad(1)
+	
 	#print(%Node2D.viewportsize)
 	
 	#print(rotation.z)
@@ -32,17 +31,15 @@ func _physics_process(delta):
 	
 	#%ProjectileLauncher.look_at(%Enemy.global_position)
 	
-	var angle = rotation
-	
 	#if Input.is_action_pressed("mouse_click"):
 		#thrust = 200
 		#apply_central_force(Vector3(0,%CoordinateCheck.directiony/10,0))
 		#
 	#else:
-	thrust = 70
-	apply_central_force(Vector3(0,%CoordinateCheck.directiony/20,0))
+	thrust = 30
+	apply_central_force(Vector3(0,%CoordinateCheck.directiony,0))
 	
-	apply_central_force(Vector3(sin(angle.y), 0, cos(angle.y)) *-thrust)
+	linear_velocity = global_transform.basis.z * -1 * thrust
 	
 	
 	if Input.is_action_pressed("mouse_click"):
