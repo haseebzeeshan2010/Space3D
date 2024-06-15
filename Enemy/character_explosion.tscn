@@ -13,8 +13,8 @@ emission_energy_multiplier = 200.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_xocxs"]
 material = SubResource("StandardMaterial3D_xqr21")
-radius = 0.1
-height = 0.2
+radius = 2.0
+height = 4.0
 
 [node name="Explosion" type="Node3D"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)

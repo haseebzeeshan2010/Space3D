@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c4hos6tghqw1v"]
+[gd_scene load_steps=43 format=3 uid="uid://c4hos6tghqw1v"]
 
 [ext_resource type="Texture2D" uid="uid://dsy6a7ls43nux" path="res://8k_sun.jpg" id="1_eg74v"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="2_6krv8"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dhgjhvhxui5hk" path="res://Enemy/Enemy_ship.tscn" id="15_khlie"]
 [ext_resource type="ArrayMesh" uid="uid://cwgoonej3rk0f" path="res://Asteroids/asteroid1.obj" id="18_1e4oq"]
 [ext_resource type="ArrayMesh" uid="uid://dl3lmr7lhxcmo" path="res://Asteroids/untitled.obj" id="18_284pq"]
+[ext_resource type="PackedScene" uid="uid://dkuxdf2pm8g64" path="res://enemy.tscn" id="20_lcdo6"]
 [ext_resource type="ArrayMesh" uid="uid://cj02hm5bkdnvb" path="res://Asteroids/asteroid2.obj" id="20_ldm66"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gh2t"]
@@ -138,6 +139,7 @@ volumetric_fog_sky_affect = 0.0
 [node name="Spaceship" type="RigidBody3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1600.3)
+mass = 138.95
 linear_damp = 2.5
 angular_damp = 2.0
 script = ExtResource("2_6krv8")
@@ -263,6 +265,7 @@ autostart = true
 
 [node name="Player_enemy" type="RigidBody3D" parent="."]
 transform = Transform3D(-0.998562, 0, 0.0536084, 0, 1, 0, -0.0536084, 0, -0.998562, 0, 0, 1384.23)
+visible = false
 linear_damp = 23.712
 angular_damp = 8.531
 script = ExtResource("7_puvbw")
@@ -811,6 +814,12 @@ omni_attenuation = 0.514184
 
 [node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wh4qx")
+
+[node name="Enemy" parent="." instance=ExtResource("20_lcdo6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.0486, 13.3017, 1276.6)
+
+[node name="Enemy2" parent="." instance=ExtResource("20_lcdo6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130.76, 119.833, 1575.13)
 
 [connection signal="input_event" from="Spaceship/Camera3D/Direction_Plane" to="Spaceship/Camera3D" method="_on_direction_plane_input_event"]
 [connection signal="timeout" from="Spaceship/Timer" to="Spaceship" method="_on_timer_timeout_char"]
