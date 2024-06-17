@@ -58,7 +58,7 @@ source = 5
 [sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_7viv6"]
 output_port_for_preview = 0
 expanded_output_ports = [0]
-constant = Color(0, 3.244, 27.025, 1)
+constant = Color(42.703, 0, 0.314, 1)
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_v5jy3"]
 source = 5
@@ -193,7 +193,7 @@ void fragment() {
 
 
 // ColorConstant:24
-	vec4 n_out24p0 = vec4(0.000000, 3.244000, 27.025000, 1.000000);
+	vec4 n_out24p0 = vec4(42.702999, 0.000000, 0.314000, 1.000000);
 
 
 // Output:0

@@ -61,7 +61,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_th8w0")
 
 [node name="Shield" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-gi_mode = 0
 mesh = ExtResource("2_ro8on")
 surface_material_override/0 = SubResource("ShaderMaterial_epa43")
 
