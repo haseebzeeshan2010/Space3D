@@ -1,10 +1,9 @@
-[gd_scene load_steps=45 format=3 uid="uid://c4hos6tghqw1v"]
+[gd_scene load_steps=44 format=3 uid="uid://c4hos6tghqw1v"]
 
 [ext_resource type="Texture2D" uid="uid://dsy6a7ls43nux" path="res://8k_sun.jpg" id="1_eg74v"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="2_6krv8"]
 [ext_resource type="Script" path="res://Camera3D.gd" id="2_fym2h"]
 [ext_resource type="Script" path="res://Node2D.gd" id="4_5pdbf"]
-[ext_resource type="PackedScene" uid="uid://c37lrm54fnr0b" path="res://test_ship_2.tscn" id="4_pag8e"]
 [ext_resource type="PackedScene" uid="uid://bpa7nxk8w6eir" path="res://Projectilelauncher.tscn" id="5_cfl8h"]
 [ext_resource type="PackedScene" uid="uid://bcmpmxovtlbvh" path="res://Test_ship_1.tscn" id="5_o8lw3"]
 [ext_resource type="Texture2D" uid="uid://dnihe717jxfdg" path="res://8k_stars.jpg" id="5_qt4ow"]
@@ -20,6 +19,9 @@
 [ext_resource type="ArrayMesh" uid="uid://dl3lmr7lhxcmo" path="res://Asteroids/untitled.obj" id="18_284pq"]
 [ext_resource type="PackedScene" uid="uid://dkuxdf2pm8g64" path="res://enemy.tscn" id="20_lcdo6"]
 [ext_resource type="ArrayMesh" uid="uid://cj02hm5bkdnvb" path="res://Asteroids/asteroid2.obj" id="20_ldm66"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7vas8"]
+size = Vector3(10.41, 10.07, 21.355)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gh2t"]
 corner_radius_top_left = 10
@@ -57,18 +59,6 @@ corner_radius_bottom_left = 10
 size = Vector3(580, 580, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lc5nf"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_bovvn"]
-size = Vector3(2.375, 3.545, 7.69)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_txluh"]
-size = Vector3(2.655, 2.17, 3.615)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_q4mlv"]
-size = Vector3(1.56, 1.62, 4.585)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_p1gek"]
-size = Vector3(5.245, 2.005, 7.1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hknf3"]
 radius = 1.91
@@ -117,6 +107,17 @@ radius = 100.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_ylvvx"]
 radius = 0.321171
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vj6l6"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_elys3"]
+noise = SubResource("FastNoiseLite_vj6l6")
+
+[sub_resource type="FogMaterial" id="FogMaterial_u0j1p"]
+density = 0.001
+albedo = Color(1, 0.815686, 0.14902, 1)
+emission = Color(1, 0.659719, 0.0337635, 1)
+density_texture = SubResource("NoiseTexture3D_elys3")
+
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_najnh"]
 panorama = ExtResource("5_qt4ow")
 
@@ -137,21 +138,25 @@ fog_light_color = Color(0.805562, 0.445069, 1.92523e-07, 1)
 fog_light_energy = 0.68
 fog_density = 0.0001
 fog_aerial_perspective = 0.926
-volumetric_fog_density = 0.001
-volumetric_fog_emission = Color(0.804274, 0.51208, 7.70092e-07, 1)
-volumetric_fog_sky_affect = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Spaceship" type="RigidBody3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1600.3)
+disable_mode = 2
+input_ray_pickable = false
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 mass = 138.95
 linear_damp = 2.5
 angular_damp = 2.0
 script = ExtResource("2_6krv8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spaceship"]
+shape = SubResource("BoxShape3D_7vas8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Spaceship"]
 
@@ -243,16 +248,6 @@ visible = false
 mesh = ExtResource("7_uf343")
 skeleton = NodePath("../../../..")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="Spaceship/Ship_axis/test_ship2"]
-collision_layer = 2
-collision_mask = 2
-input_ray_pickable = false
-platform_floor_layers = 4294967040
-
-[node name="test_ship1" parent="Spaceship/Ship_axis" instance=ExtResource("4_pag8e")]
-transform = Transform3D(-6.55671e-09, 0, -0.15, 0, 0.15, 0, 0.15, 0, -6.55671e-09, 0, 0, 0)
-visible = false
-
 [node name="ProjectileLauncher" parent="Spaceship/Ship_axis" instance=ExtResource("5_cfl8h")]
 unique_name_in_owner = true
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 5.07539, 5.69812)
@@ -265,22 +260,6 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 5.07539, 5.69812)
 [node name="Timer" type="Timer" parent="Spaceship"]
 wait_time = 0.25
 autostart = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Spaceship"]
-transform = Transform3D(1, 0, -2.84217e-14, 0, 1, 0, 2.84217e-14, 0, 1, 8.20728e-09, 1.735, -1.96332)
-shape = SubResource("BoxShape3D_bovvn")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Spaceship"]
-transform = Transform3D(1, 0, 0, 0, 0.878817, -0.477159, 0, 0.477159, 0.878817, 0, 1.75, 2.895)
-shape = SubResource("BoxShape3D_txluh")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Spaceship"]
-transform = Transform3D(1, 0, -1.42109e-14, 0, 0.993768, -0.111469, 0, 0.111469, 0.993768, -1.45519e-11, 1.107, 3.41504)
-shape = SubResource("BoxShape3D_q4mlv")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Spaceship"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.445, -1.405)
-shape = SubResource("BoxShape3D_p1gek")
 
 [node name="Player_enemy" type="RigidBody3D" parent="."]
 transform = Transform3D(-0.998562, 0, 0.0536084, 0, 1, 0, -0.0536084, 0, -0.998562, 0, 0, 1384.23)
@@ -829,6 +808,10 @@ distance_fade_enabled = true
 distance_fade_length = 4096.0
 omni_range = 4096.0
 omni_attenuation = 0.514184
+
+[node name="FogVolume" type="FogVolume" parent="Scenery/Sun"]
+size = Vector3(800, 800, 800)
+material = SubResource("FogMaterial_u0j1p")
 
 [node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wh4qx")

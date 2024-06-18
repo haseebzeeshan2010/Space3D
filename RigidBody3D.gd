@@ -14,7 +14,7 @@ func _physics_process(delta):
 	#print(%Node2D.viewportsize)
 	
 	#print(rotation.z)
-	constant_torque = Vector3(0,clamp(float(%CoordinateCheck.directionx/5000),-0.2735,0.2735)*100,0)
+	constant_torque = Vector3(0,clamp(float(%CoordinateCheck.directionx/500),-0.2735,0.2735)*2000,0)
 	
 	
 	#print(%CoordinateCheck.directiony)
@@ -36,7 +36,7 @@ func _physics_process(delta):
 		#apply_central_force(Vector3(0,%CoordinateCheck.directiony/10,0))
 		#
 	#else:
-	thrust = 70
+	thrust = 30
 	apply_central_force(Vector3(0,%CoordinateCheck.directiony,0)*200)
 	
 	linear_velocity = global_transform.basis.z * -1 * thrust

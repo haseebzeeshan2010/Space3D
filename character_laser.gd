@@ -3,7 +3,7 @@ const bullet_explosion = preload("res://Enemy/character_explosion.tscn")
 #@onready var bullet_explosion = preload("res://explosion.tscn")
 
 func _physics_process(delta):
-	linear_velocity = global_transform.basis.z * -1 * 300
+	linear_velocity = global_transform.basis.z * -1 * 600
 	#print(global_position)
 
 func _on_timer_timeout():
