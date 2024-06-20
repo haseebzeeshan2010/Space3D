@@ -56,7 +56,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_km1j2"]
-size = Vector3(580, 580, 1)
+size = Vector3(200, 200, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lc5nf"]
 
@@ -188,7 +188,7 @@ show_percentage = false
 
 [node name="Camera3D" type="Camera3D" parent="Spaceship"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.968148, 0.25038, 0, -0.25038, 0.968148, 0, 9.476, 17.999)
+transform = Transform3D(1, 0, 0, 0, 0.968148, 0.25038, 0, -0.25038, 0.968148, 0, 9.77316, 17.999)
 fov = 71.6
 script = ExtResource("2_fym2h")
 
@@ -799,7 +799,6 @@ transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
 shape = SubResource("SphereShape3D_ylvvx")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Scenery/Sun"]
-transform = Transform3D(0.211843, 0, 0, 0, 0.207594, 0, 0, 0, 0.193576, 0, 0, 0)
 light_color = Color(1, 0.768627, 0.537255, 1)
 light_energy = 16.0
 light_specular = 16.0
