@@ -5,24 +5,14 @@ var thrust = 70
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	#rotation = Vector3(Vector2((get_viewport().get_mouse_position() - position.xy).angle), 0)
-	#print(get_angle_to(get_viewport().get_mouse_position()))
-	#set_linear_damp(1.4)
+
 	
 	impulse_strength = 38
 	
-	#print(%Node2D.viewportsize)
-	
-	#print(rotation.z)
+
 	constant_torque = Vector3(0,clamp(float(%CoordinateCheck.directionx/500),-0.2735,0.2735)*2000,0)
 	
-	
-	#print(%CoordinateCheck.directiony)
-	#if %CoordinateCheck.directiony > 0:
-		#apply_central_force(Vector3(0,20,0))
-	#else:
-		#apply_central_force(Vector3(0,-20,0))
-		
+
 	
 		
 	#SHIP YAW	
